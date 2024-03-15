@@ -1,10 +1,23 @@
-<div class="todolist">
-<%- include("partials/header.ejs") %>
 
-<% if(locals.labelname){var i=0; labelname.forEach((label)=>{%>
+<%- include("partials/header.ejs") %>
+<div class="todolist">
+
+    <div class="logo"> <img src="/images/logo todo.png" alt=""></div>
+    <h1><%=name%></h1>
+    <div>
+    <form action="/submit" method="POST"  class="add">
+    <input type="text" id="task" name="task">
+    
+    <button type="submit" name="submit" class="submit" value="<%= name %>">+</button>
+    <!-- <input type="submit" name="submit" value="+"> -->
+    </form>   
+    </div>
+    
+<% if(locals.labelname){var i=1; items.forEach((label)=>{%>
     <div class="task">
-        <%- label %>
-        <form class="material-symbols-outlined" action="/delete" method="post"> <input type="number"name="num" value="<%=i%>" style="display: none;"> <button type="submit"> <span class="material-symbols-outlined">delete</span></button></form>
+        <input type="checkbox" id="task<%=i%>" name="task<%i%>" value="task<%i%>">
+        <div class="taskitem"class="" for="task<%=i%>" id="task<%=i%>"><%=label.task%></div>
+        <form class="material-symbols-outlined" action="/delete" method="post"> <input type="text" name="num" value="<%=label._id%>" style="display: none;"> <button type="submit" name="submit" value="<%= name %>"> <span class="material-symbols-outlined">delete</span></button></form>
     </div>
 <% i++;})}%>
 </div>
